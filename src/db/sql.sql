@@ -4,7 +4,8 @@ select pro.id as id_proceso, pro.nro_proceso as numero_proceso, pro.cite, pro.fe
 FROM pag_procesos pro, per_dependencias dep, pag_motivos mot  
 WHERE pro.dependencia_id = dep.id and
       pro.motivo_id = mot.id and
-      pro.id = 109947;
+      pro.id = 109947
+order by pro.fecha_emision;
 
 select est.id as estado_id, est.fecha_envio as envio_date, est.fecha_recepcion as recepcion_date, est.proceso_id as id_proceso,
        est.estado_id as id_estado, pes.nombre as estado, pes.descripcion as descipcion_est,
@@ -21,6 +22,7 @@ select est.id as estado_id, est.fecha_envio as envio_date, est.fecha_recepcion a
 from pag_procesos_estados est, pag_estados pes
 where est.estado_id = pes.id and
       est.proceso_id=109947
+order by est.fecha_envio;
 
 select obs.modified as fecha, obs.descripcion as observacion, 
 	(
@@ -29,4 +31,5 @@ select obs.modified as fecha, obs.descripcion as observacion,
 	              usr.id = obs.usuario_analista_id
 	) as analista 
 from pag_observaciones obs
-where obs.proceso_id=109947;
+where obs.proceso_id=109947
+order by obs.modified;
