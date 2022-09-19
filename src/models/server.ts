@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import pagosRouter from '../routes/pagos.routes'
+import seguimientoRouter from '../routes/seguimiento.routes';
 import db from '../db/conex';
 
 class Server {
@@ -9,13 +10,12 @@ class Server {
   private port: string; 
   private apiPaths = {
     pagos: `/v1/api/pagos`,
-    estados: `/v1/api/estados`,
-    observaciones: `/v1/api/observaciones`
+    seguimiento: `/v1/api/seguimiento`
   }
 
   constructor(){
     this.app = express();
-    this.port = process.env.PORT || '4500';
+    this.port = process.env.PORT || '4400';
 
     //base de datos
     this.dbConnection();
@@ -49,6 +49,7 @@ class Server {
 
   routes(){
     this.app.use( this.apiPaths.pagos, pagosRouter );
+    this.app.use( this.apiPaths.seguimiento, seguimientoRouter );
   }
 
   listen(){
